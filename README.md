@@ -29,8 +29,34 @@ Python3/Django
 |---|---|---|---|
 |ID*|int|Y|索引|
 |Course|foreign|Y|课程|
-|Teacher|foreign|Y|教师安装教程
+|Teacher|foreign|Y|教师|
+|StartTime|char|Y|开始时间|
+|EndTime|char|Y|结束时间|
+|Place|char|Y|地点|
+|JoinedNum|int|Y|已加入人数|
 
+## Student - 学生数据表
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|学号|
+|Name|char|Y|姓名|
+|Phone|char|Y|手机|
+|Email|char|N|邮箱|
+|AppendCourse|foreign|N|已参加课程|
+
+## AppendCourse - 学生参加的课程
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|索引|
+|Teacher|foreign|Y|教师|
+|Course|foreign|Y|课程|
+
+## JoinedTutorial - 已参加的辅导
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|索引|
+|Student|foreign|Y|学生|
+|Tutorial|foreign|Y|辅导|
 
 ## 启动项目
 1.  git clone
