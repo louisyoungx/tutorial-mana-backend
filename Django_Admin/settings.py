@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'simpleui',
-    'tinymce',
+    # 'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -82,10 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': Database_Name,
-        'USER': 'root',
-        'PASSWORD': '201314abc',
-        'HOST': 'cdb-evobkiui.cd.tencentcdb.com',
-        'PORT': 10115,
+        'USER': 'tutorial',
+        'PASSWORD': 'tutorial_louisyoung',
+        'HOST': 'www.louisyoung.site',
+        'PORT': 3306,
     }
 }
 
@@ -162,19 +162,19 @@ EMAIL_HOST_PASSWORD = 'GUTCEBDOYWMHGLWY'         #发送邮件的邮箱密码(�
 EMAIL_FROM = Email_Sender + '<louisyoung163@163.com>'
 
 # django-redis 缓存设置
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://45.40.234.190:6379/" + Redis_Data,
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://45.40.234.190:6379/" + Redis_Data,
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#         }
+#     }
+# }
 
 # redis 作为 session backend 存储
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+# SESSION_CACHE_ALIAS = "default"
 
 
 # 富文本编辑器

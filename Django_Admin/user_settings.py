@@ -1,6 +1,6 @@
 
 # 数据库名
-Database_Name = "Louis-House"
+Database_Name = "tutorial_manage"
 
 # 服务器域名
 Host_Name = "https://LouisYoung.work"

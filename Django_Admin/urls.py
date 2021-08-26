@@ -23,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico',RedirectView.as_view(url='static/images/favicon.ico')),
     path('/', include("Applications.Global.urls")),
+    path('/teacher', include("Applications.Teacher.urls")),
+    path('/student', include("Applications.Student.urls")),
 ]   + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) \
     + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
