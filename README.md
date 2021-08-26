@@ -42,7 +42,6 @@ Python3/Django
 |Name|char|Y|姓名|
 |Phone|char|Y|手机|
 |Email|char|N|邮箱|
-|AppendCourse|foreign|N|已参加课程|
 
 ## AppendCourse - 学生参加的课程
 |字段|类型|必须|备注|
