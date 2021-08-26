@@ -1,37 +1,44 @@
 # TutorialManagement
 
-#### 介绍
+## 介绍
 学生课业帮扶系统
 
-#### 软件架构
-软件架构说明
+## 软件架构
+Python3/Django
+
+## Teacher - 教师数据表
+
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|工号|
+|Name|char|Y|姓名|
+|Phone|char|N|手机|
+|Email|char|N|邮箱|
+
+## Course - 教师管理的课程
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|索引|
+|Teacher|foreign|Y|教师|
+|Name|char|Y|课程名称|
+|Term|char|Y|学期|
+|Limit|int|N|人数限制|
+
+## Tutorial - 已发布的辅导
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|索引|
+|Course|foreign|Y|课程|
+|Teacher|foreign|Y|教师安装教程
 
 
-#### 安装教程
+## 启动项目
+1.  git clone
+2.  python3 manage.py runserver
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
+## 参与贡献
 
 1.  Fork 本仓库
 2.  新建 Feat_xxx 分支
 3.  提交代码
 4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
