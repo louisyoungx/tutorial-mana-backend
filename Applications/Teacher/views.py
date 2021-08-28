@@ -1,15 +1,28 @@
-import json
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.middleware.csrf import get_token
-from django.views import View
+from rest_framework import viewsets
+from rest_framework import permissions
+from Applications.Teacher.models import Teacher, Course, Tutorial
+from Applications.Teacher.serializers import TeacherSerializer, CourseSerializer, TutorialSerializer
 
-# Create your views here.
+class TeacherViewSet(viewsets.ModelViewSet):
+    """
+    对学生列表的API操作
+    """
+    queryset = Teacher.objects.all().order_by('-creat_time')
+    serializer_class = TeacherSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
+class CourseViewSet(viewsets.ModelViewSet):
+    """
+    对学生列表的API操作
+    """
+    queryset = Course.objects.all().order_by('-creat_time')
+    serializer_class = CourseSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-
-class Token(View):
-
-    def get(self,request):
-        token = get_token(request)
-        return HttpResponse(json.dumps({'token': token}), content_type="application/json,charset=utf-8")
+class TutorialViewSet(viewsets.ModelViewSet):
+    """
+    对学生列表的API操作
+    """
+    queryset = Tutorial.objects.all().order_by('-creat_time')
+    serializer_class = TutorialSerializer
+    permission_classes = [permissions.IsAuthenticated]
