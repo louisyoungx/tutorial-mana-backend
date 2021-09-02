@@ -13,7 +13,7 @@ class StudentViewSet(viewsets.ModelViewSet):
 
 class JoinedCourseViewSet(viewsets.ModelViewSet):
     """
-    对学生列表的API操作
+    对学生课程的API操作
     """
     queryset = JoinedCourse.objects.all().order_by('-creat_time')
     serializer_class = JoinedCourseSerializer
@@ -21,7 +21,7 @@ class JoinedCourseViewSet(viewsets.ModelViewSet):
 
 class JoinedTutorialViewSet(viewsets.ModelViewSet):
     """
-    对学生列表的API操作
+    对学生辅导的API操作
     """
     queryset = JoinedTutorial.objects.all().order_by('-creat_time')
     serializer_class = JoinedTutorialSerializer

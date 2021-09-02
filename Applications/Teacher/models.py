@@ -13,13 +13,13 @@ class Teacher(BaseModel):
     phone = models.CharField(max_length=11, blank=True, null=True, verbose_name='手机号')
     email = models.EmailField(max_length=20, blank=True, verbose_name='邮箱')
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'teacher'
         verbose_name = '教师'
         verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.name
 
 class Course(BaseModel):
     """教师管理的课程"""
@@ -51,7 +51,7 @@ class Tutorial(BaseModel):
 
 
     def __str__(self):
-        return self.course
+        return self.course.name
 
 
     class Meta:

@@ -12,8 +12,11 @@ Python3/Django
 |---|---|---|---|
 |ID*|int|Y|工号|
 |Name|char|Y|姓名|
+|- Avatar|img|N|头像|
+|- Wechat|char|N|微信标识|
 |Phone|char|N|手机|
 |Email|char|N|邮箱|
+|- location|char|N|工作地点|
 
 ## Course - 教师管理的课程
 |字段|类型|必须|备注|
@@ -21,6 +24,8 @@ Python3/Django
 |ID*|int|Y|索引|
 |Teacher|foreign|Y|教师|
 |Name|char|Y|课程名称|
+|- Wallpaper|img|N|背景|
+|- Describe|char|N|描述|
 |Term|char|Y|学期|
 |Limit|int|N|人数限制|
 
@@ -30,6 +35,7 @@ Python3/Django
 |ID*|int|Y|索引|
 |Course|foreign|Y|课程|
 |Teacher|foreign|Y|教师|
+|- Describe|char|Y|备注|
 |StartTime|char|Y|开始时间|
 |EndTime|char|Y|结束时间|
 |Place|char|Y|地点|
@@ -40,6 +46,8 @@ Python3/Django
 |---|---|---|---|
 |ID*|int|Y|学号|
 |Name|char|Y|姓名|
+|- Avatar|img|N|头像|
+|- Wechat|char|N|微信标识|
 |Phone|char|Y|手机|
 |Email|char|N|邮箱|
 
@@ -56,6 +64,19 @@ Python3/Django
 |ID*|int|Y|索引|
 |Student|foreign|Y|学生|
 |Tutorial|foreign|Y|辅导|
+
+## *TutorialQuest - 已发起的辅导请求
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|索引|
+|Student|foreign|Y|学生|
+|Course|foreign|Y|课程|
+|Teacher|foreign|Y|教师|
+|Describe|char|N|备注|
+|ExpectTime|char|Y|期望时间|
+|ConfirmTime|char|Y|确认时间|
+|ExpectPlace|char|Y|期望地点|
+|ConfirmPlace|char|Y|确认地点|
 
 ## 启动项目
 1.  git clone
