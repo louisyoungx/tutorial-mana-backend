@@ -5,7 +5,7 @@ from Applications.Student.models import Student, JoinedCourse, JoinedTutorial
 # Student模型的管理器
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('uid', 'name', 'phone', 'email')
+    list_display = ('uid', 'name', 'avatar', 'wechat_id', 'phone', 'email')
 
 # JoinedCourse模型的管理器
 @admin.register(JoinedCourse)
@@ -15,4 +15,4 @@ class JoinedCourseAdmin(admin.ModelAdmin):
 # JoinedTutorial模型的管理器
 @admin.register(JoinedTutorial)
 class JoinedTutorialAdmin(admin.ModelAdmin):
-    list_display = ('student', 'tutorial')
+    list_display = ('student', 'tutorial', 'is_done')

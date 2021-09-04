@@ -5,7 +5,7 @@ from Applications.Student.models import Student, JoinedCourse, JoinedTutorial
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
-        fields = ['uid', 'name', 'phone', 'email']
+        fields = ['uid', 'name', 'avatar', 'wechat_id', 'phone', 'email']
 
 
 class JoinedCourseSerializer(serializers.Serializer):
@@ -15,7 +15,6 @@ class JoinedCourseSerializer(serializers.Serializer):
                                               label='所属老师')
     course_id = serializers.SlugRelatedField(slug_field="id", source="course", queryset=Course.objects.all(),
                                              label='所属课程')
-    is_delete = serializers.BooleanField(default=False, label='是否结束')
 
     def create(self, validated_data):
         """
@@ -39,7 +38,7 @@ class JoinedTutorialSerializer(serializers.Serializer):
                                               label='所属学生')
     tutorial_id = serializers.SlugRelatedField(slug_field="id", source="tutorial", queryset=Tutorial.objects.all(),
                                                label='所属辅导')
-    is_delete = serializers.BooleanField(default=False, label='是否结束')
+    is_done = serializers.BooleanField(default=False, label='是否完成')
 
     def create(self, validated_data):
         """

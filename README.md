@@ -4,68 +4,82 @@
 学生课业帮扶系统
 
 ## 软件架构
-Python3/Django
+##### Python3
+##### Django
+##### Rest Framework
 
-## Teacher - 教师数据表
+## 数据库模型
 
+### BaseModel - 基类
 |字段|类型|必须|备注|
 |---|---|---|---|
-|ID*|int|Y|工号|
+|CreatTime|date|N|创建时间|
+|UpdateTime|date|N|修改时间|
+|IsDelete|bool|N|删除标记|
+
+### Teacher - 教师数据表
+|字段|类型|必须|备注|
+|---|---|---|---|
+|ID*|int|Y|索引|
+|UID|int|Y|工号|
 |Name|char|Y|姓名|
-|- Avatar|img|N|头像|
-|- Wechat|char|N|微信标识|
+|Avatar|img|N|头像|
+|WechatID|char|N|微信标识|
 |Phone|char|N|手机|
 |Email|char|N|邮箱|
-|- location|char|N|工作地点|
+|Location|char|N|工作地点|
 
-## Course - 教师管理的课程
+### Course - 教师管理的课程
 |字段|类型|必须|备注|
 |---|---|---|---|
 |ID*|int|Y|索引|
 |Teacher|foreign|Y|教师|
 |Name|char|Y|课程名称|
-|- Wallpaper|img|N|背景|
-|- Describe|char|N|描述|
+|Wallpaper|img|N|背景|
+|Describe|char|N|描述|
 |Term|char|Y|学期|
 |Limit|int|N|人数限制|
 
-## Tutorial - 已发布的辅导
+### Tutorial - 已发布的辅导
 |字段|类型|必须|备注|
 |---|---|---|---|
 |ID*|int|Y|索引|
 |Course|foreign|Y|课程|
 |Teacher|foreign|Y|教师|
-|- Describe|char|Y|备注|
+|Describe|char|Y|备注|
 |StartTime|char|Y|开始时间|
 |EndTime|char|Y|结束时间|
 |Place|char|Y|地点|
 |JoinedNum|int|Y|已加入人数|
+|- IsDone|bool|Y|是否完成|
 
-## Student - 学生数据表
+### Student - 学生数据表
 |字段|类型|必须|备注|
 |---|---|---|---|
-|ID*|int|Y|学号|
+|ID*|int|Y|索引|
+|UID|int|Y|学号|
 |Name|char|Y|姓名|
-|- Avatar|img|N|头像|
-|- Wechat|char|N|微信标识|
+|Avatar|img|N|头像|
+|WechatID|char|N|微信标识|
 |Phone|char|Y|手机|
 |Email|char|N|邮箱|
 
-## AppendCourse - 学生参加的课程
+### AppendCourse - 学生参加的课程
 |字段|类型|必须|备注|
 |---|---|---|---|
 |ID*|int|Y|索引|
 |Teacher|foreign|Y|教师|
 |Course|foreign|Y|课程|
 
-## JoinedTutorial - 已参加的辅导
+### JoinedTutorial - 已参加的辅导
 |字段|类型|必须|备注|
 |---|---|---|---|
 |ID*|int|Y|索引|
 |Student|foreign|Y|学生|
 |Tutorial|foreign|Y|辅导|
+|- IsDone|bool|Y|是否完成|
 
-## *TutorialQuest - 已发起的辅导请求
+### （待完成）TutorialQuest - 已发起的辅导请求
 |字段|类型|必须|备注|
 |---|---|---|---|
 |ID*|int|Y|索引|

@@ -1,6 +1,8 @@
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
+
 from Django_Admin import settings
 from django.urls import include, path
 
@@ -25,7 +27,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    # path('/teacher', include("Applications.Teacher.urls")),
-    # path('/student', include("Applications.Student.urls")),
+    path('favicon.ico', RedirectView.as_view(url='static/favicon.ico')),
 ]   + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) \
     + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
