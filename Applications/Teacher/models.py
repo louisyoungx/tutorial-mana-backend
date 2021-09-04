@@ -10,11 +10,13 @@ class Teacher(BaseModel):
     '''教师模型类'''
     uid = models.CharField(max_length=10, blank=False, null=False, unique=True, verbose_name='工号')
     name = models.CharField(max_length=6, blank=True, verbose_name='姓名')
+    # avatar = models.ImageField(upload_to='avatar', blank=True, verbose_name='头像')
+    # wechatid = models.CharField(max_length=30, blank=True, null=True, verbose_name='微信openid')
     phone = models.CharField(max_length=11, blank=True, null=True, verbose_name='手机号')
     email = models.EmailField(max_length=20, blank=True, verbose_name='邮箱')
 
     def __str__(self):
-        return self.name
+        return self.uid
 
     class Meta:
         db_table = 'teacher'
@@ -30,7 +32,7 @@ class Course(BaseModel):
     limit = models.IntegerField(default=0, blank=False, verbose_name='人数限制')
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
 
     class Meta:
@@ -51,7 +53,7 @@ class Tutorial(BaseModel):
 
 
     def __str__(self):
-        return self.course.name
+        return str(self.id)
 
 
     class Meta:

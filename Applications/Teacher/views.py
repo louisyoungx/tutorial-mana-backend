@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 
 
+
 class TeacherViewSet(viewsets.ModelViewSet):
     """
     对教师列表的API操作
@@ -15,14 +16,16 @@ class TeacherViewSet(viewsets.ModelViewSet):
     serializer_class = TeacherSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('uid',)
-    search_fields = ('email',)
+    filter_fields = ('uid', 'name', 'phone', 'email',)
+    search_fields = ('uid', 'name', 'phone', 'email',)
 
     @action(methods=['post'], detail=True)
     def login(self, request, uid=None):
         teacher = Teacher.objects.filter(uid=uid)
         serializer = self.get_serializer(teacher, many=True)
         return Response(serializer.data)
+
+
 
 class CourseViewSet(viewsets.ModelViewSet):
     """
@@ -32,8 +35,10 @@ class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('name',)
-    search_fields = ('name', 'teacher',)
+    filter_fields = ('teacher_id', 'name', 'term', 'is_delete',)
+    search_fields = ('teacher_id', 'name', 'term', 'is_delete',)
+
+
 
 class TutorialViewSet(viewsets.ModelViewSet):
     """
@@ -42,3 +47,6 @@ class TutorialViewSet(viewsets.ModelViewSet):
     queryset = Tutorial.objects.all().order_by('-creat_time')
     serializer_class = TutorialSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('course_id', 'is_delete',)
+    search_fields = ('course_id', 'is_delete',)
