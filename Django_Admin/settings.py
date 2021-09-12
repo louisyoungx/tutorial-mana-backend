@@ -135,7 +135,8 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
@@ -205,3 +206,6 @@ DEFAULT_FILE_STORAGE = 'utils.Image.upload.ImageStorage'
 IMAGE_URL = 'http://www.louisyoung.site:8002/TutorialManage/'
 IMAGE_FILE_PATH = '/photo/Image Hosting Service/LouisHouse/'
 IMAGE_WEBDAV_UPLOAD = 'http://www.louisyoung.site:5005/'
+
+
+APPEND_SLASH=False

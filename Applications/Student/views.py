@@ -10,7 +10,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     """
     queryset = Student.objects.all().order_by('-creat_time')
     serializer_class = StudentSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('uid', 'name', 'email',)
     search_fields = ('uid', 'name', 'email',)
@@ -21,7 +20,6 @@ class JoinedCourseViewSet(viewsets.ModelViewSet):
     """
     queryset = JoinedCourse.objects.all().order_by('-creat_time')
     serializer_class = JoinedCourseSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('student_id', 'teacher_id', 'course_id', 'is_delete',)
     search_fields = ('student_id', 'teacher_id', 'course_id', 'is_delete',)
@@ -32,7 +30,6 @@ class JoinedTutorialViewSet(viewsets.ModelViewSet):
     """
     queryset = JoinedTutorial.objects.all().order_by('-creat_time')
     serializer_class = JoinedTutorialSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('student_id', 'tutorial_id', 'is_delete',)
     search_fields = ('student_id', 'tutorial_id', 'is_delete',)

@@ -5,13 +5,14 @@ from Applications.Student.models import Student, JoinedCourse, JoinedTutorial
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
-        fields = ['uid', 'name', 'avatar', 'wechat_id', 'phone', 'email']
+        fields = ['id', 'uid', 'name', 'avatar', 'wechat_id', 'phone', 'email']
 
 
 class JoinedCourseSerializer(serializers.Serializer):
-    student_id = serializers.SlugRelatedField(slug_field="uid", source="student", queryset=Student.objects.all(),
+    id = serializers.CharField(max_length=6, label='ID')
+    student_id = serializers.SlugRelatedField(slug_field="id", source="student", queryset=Student.objects.all(),
                                               label='所属学生')
-    teacher_id = serializers.SlugRelatedField(slug_field="uid", source="teacher", queryset=Teacher.objects.all(),
+    teacher_id = serializers.SlugRelatedField(slug_field="id", source="teacher", queryset=Teacher.objects.all(),
                                               label='所属老师')
     course_id = serializers.SlugRelatedField(slug_field="id", source="course", queryset=Course.objects.all(),
                                              label='所属课程')
@@ -34,7 +35,8 @@ class JoinedCourseSerializer(serializers.Serializer):
 
 
 class JoinedTutorialSerializer(serializers.Serializer):
-    student_id = serializers.SlugRelatedField(slug_field="uid", source="student", queryset=Student.objects.all(),
+    id = serializers.CharField(max_length=6, label='ID')
+    student_id = serializers.SlugRelatedField(slug_field="id", source="student", queryset=Student.objects.all(),
                                               label='所属学生')
     tutorial_id = serializers.SlugRelatedField(slug_field="id", source="tutorial", queryset=Tutorial.objects.all(),
                                                label='所属辅导')

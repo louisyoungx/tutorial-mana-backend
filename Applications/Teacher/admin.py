@@ -15,4 +15,4 @@ class CourseAdmin(admin.ModelAdmin):
 # Tutorial模型的管理器
 @admin.register(Tutorial)
 class TutorialAdmin(admin.ModelAdmin):
-    list_display = ('course', 'teacher', 'start_time', 'end_time', 'place', 'joined_num')
+    list_display = ('course', 'teacher', 'start_time', 'duration_time', 'place', 'joined_num')

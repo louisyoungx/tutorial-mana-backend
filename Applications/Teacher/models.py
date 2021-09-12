@@ -30,7 +30,7 @@ class Teacher(BaseModel):
 class Course(BaseModel):
     """教师管理的课程"""
     teacher = models.ForeignKey(Teacher, blank=False, null=False, on_delete=models.CASCADE, verbose_name='所属老师')
-    name = models.CharField(max_length=6, verbose_name='课程')
+    name = models.CharField(max_length=10, verbose_name='课程')
     wallpaper = models.URLField(default='http://www.louisyoung.site:8002/TutorialManage/wallpaper.jpg', blank=True, verbose_name='背景')
     describe = models.CharField(max_length=50, blank=True, null=True, verbose_name='描述')
     term = models.CharField(max_length=10, verbose_name='学期')
@@ -54,7 +54,7 @@ class Tutorial(BaseModel):
     teacher = models.ForeignKey(Teacher, blank=False, null=False, on_delete=models.CASCADE, verbose_name='所属老师')
     describe = models.CharField(max_length=50, blank=True, null=True, verbose_name='描述')
     start_time = models.DateTimeField(verbose_name='开始时间')
-    end_time = models.DateTimeField(verbose_name='结束时间')
+    duration_time = models.FloatField(default=2.0, verbose_name='持续时间')
     place = models.CharField(max_length=50, verbose_name='地点')
     joined_num = models.IntegerField(default=0, verbose_name='已加入人数')
     is_done = models.BooleanField(default=False, verbose_name='是否完成')

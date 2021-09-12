@@ -14,7 +14,6 @@ class TeacherViewSet(viewsets.ModelViewSet):
     """
     queryset = Teacher.objects.all().order_by('-creat_time')
     serializer_class = TeacherSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('uid', 'name', 'phone', 'email',)
     search_fields = ('uid', 'name', 'phone', 'email',)
@@ -33,10 +32,31 @@ class CourseViewSet(viewsets.ModelViewSet):
     """
     queryset = Course.objects.all().order_by('-creat_time')
     serializer_class = CourseSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ('teacher_id', 'name', 'term', 'is_delete',)
     search_fields = ('teacher_id', 'name', 'term', 'is_delete',)
+
+    @action(methods=['put'], detail=True)
+    def put(self, request, pk):
+        #过滤出nid等于多少的对象。
+        course = Course.objects.get(id=str(pk))
+        '''请注意，在序列化时，我们除了传入data参数外，还需告诉序列化组件，我们需要更新哪条数据，也就是instance，
+        我们使用的序列化类是三版本的序列化类'''
+        serialized_data = CourseSerializer(data=request.data,instance=course,many=False)
+        if serialized_data.is_valid():
+            serialized_data.save()
+            return Response(serialized_data.data)
+        else:
+            return Response(serialized_data.errors)
+
+    @action(methods=['delete'], detail=True)
+    def delete(self, request, pk):
+        #执行ORM删除数据的操作
+        # course = Course.objects.get(id=str(pk)).delete()
+        course = Course.objects.get(id=str(pk))
+        course.is_delete = True
+        course.save()
+        return Response('success', status=200)
 
 
 
@@ -46,7 +66,28 @@ class TutorialViewSet(viewsets.ModelViewSet):
     """
     queryset = Tutorial.objects.all().order_by('-creat_time')
     serializer_class = TutorialSerializer
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('course_id', 'is_delete',)
-    search_fields = ('course_id', 'is_delete',)
+    filter_fields = ('teacher_id', 'course_id', 'is_delete',)
+    search_fields = ('teacher_id', 'course_id', 'is_delete',)
+
+    @action(methods=['put'], detail=True)
+    def put(self, request, pk):
+        #过滤出nid等于多少的对象。
+        tutorial = Tutorial.objects.get(id=str(pk))
+        '''请注意，在序列化时，我们除了传入data参数外，还需告诉序列化组件，我们需要更新哪条数据，也就是instance，
+        我们使用的序列化类是三版本的序列化类'''
+        serialized_data = CourseSerializer(data=request.data,instance=tutorial,many=False)
+        if serialized_data.is_valid():
+            serialized_data.save()
+            return Response(serialized_data.data)
+        else:
+            return Response(serialized_data.errors)
+
+    @action(methods=['delete'], detail=True)
+    def delete(self, request, pk):
+        #执行ORM删除数据的操作
+        # tutorial = Tutorial.objects.get(id=str(pk)).delete()
+        tutorial = Tutorial.objects.get(id=str(pk))
+        tutorial.is_delete = True
+        tutorial.save()
+        return Response('success', status=200)
