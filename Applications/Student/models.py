@@ -46,6 +46,7 @@ class JoinedTutorial(BaseModel):
     """学生参加的辅导"""
     student = models.ForeignKey(Student, blank=False, null=False, on_delete=models.CASCADE, verbose_name='所属学生')
     tutorial = models.ForeignKey(Tutorial, blank=False, null=False, on_delete=models.CASCADE, verbose_name='辅导')
+    course = models.ForeignKey(Course, blank=False, null=True, on_delete=models.CASCADE, verbose_name='所属的课程')
     is_done = models.BooleanField(default=False, verbose_name='是否完成')
 
     def __str__(self):

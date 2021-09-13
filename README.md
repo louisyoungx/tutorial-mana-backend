@@ -93,6 +93,7 @@
 |ID*|int|Y|索引|
 |Student|foreign|Y|学生|
 |Tutorial|foreign|Y|辅导|
+|Course|foreign|Y|课程|
 |- IsDone|bool|Y|是否完成|
 
 ### （待完成）TutorialQuest - 已发起的辅导请求

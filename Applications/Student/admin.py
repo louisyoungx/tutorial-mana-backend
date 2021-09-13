@@ -15,4 +15,4 @@ class JoinedCourseAdmin(admin.ModelAdmin):
 # JoinedTutorial模型的管理器
 @admin.register(JoinedTutorial)
 class JoinedTutorialAdmin(admin.ModelAdmin):
-    list_display = ('student', 'tutorial', 'is_done')
+    list_display = ('student', 'tutorial', 'course', 'is_done')

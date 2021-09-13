@@ -9,10 +9,10 @@ class StudentSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class JoinedCourseSerializer(serializers.Serializer):
-    id = serializers.CharField(max_length=6, label='ID')
+    id = serializers.CharField(required=False, max_length=6, label='ID')
     student_id = serializers.SlugRelatedField(slug_field="id", source="student", queryset=Student.objects.all(),
                                               label='所属学生')
-    teacher_id = serializers.SlugRelatedField(slug_field="id", source="teacher", queryset=Teacher.objects.all(),
+    teacher_id = serializers.SlugRelatedField(required=False, slug_field="id", source="teacher", queryset=Teacher.objects.all(),
                                               label='所属老师')
     course_id = serializers.SlugRelatedField(slug_field="id", source="course", queryset=Course.objects.all(),
                                              label='所属课程')
@@ -35,12 +35,14 @@ class JoinedCourseSerializer(serializers.Serializer):
 
 
 class JoinedTutorialSerializer(serializers.Serializer):
-    id = serializers.CharField(max_length=6, label='ID')
+    id = serializers.CharField(required=False, max_length=6, label='ID')
     student_id = serializers.SlugRelatedField(slug_field="id", source="student", queryset=Student.objects.all(),
                                               label='所属学生')
     tutorial_id = serializers.SlugRelatedField(slug_field="id", source="tutorial", queryset=Tutorial.objects.all(),
                                                label='所属辅导')
-    is_done = serializers.BooleanField(default=False, label='是否完成')
+    course_id = serializers.SlugRelatedField(required=False, slug_field="id", source="course", queryset=Course.objects.all(),
+                                             label='所属课程')
+    is_done = serializers.BooleanField(required=False, default=False, label='是否完成')
 
     def create(self, validated_data):
         """
@@ -48,10 +50,12 @@ class JoinedTutorialSerializer(serializers.Serializer):
         """
         student = Student.objects.get(uid=validated_data['student'])
         tutorial = Tutorial.objects.get(id=str(validated_data['tutorial']))
+        course = tutorial.course
 
         joined_tutorial = JoinedTutorial()
         joined_tutorial.student = student
         joined_tutorial.tutorial = tutorial
+        joined_tutorial.course = course
         joined_tutorial.save()
 
         return joined_tutorial
