@@ -18,11 +18,24 @@ class TeacherViewSet(viewsets.ModelViewSet):
     filter_fields = ('uid', 'name', 'phone', 'email',)
     search_fields = ('uid', 'name', 'phone', 'email',)
 
-    @action(methods=['post'], detail=True)
-    def login(self, request, uid=None):
-        teacher = Teacher.objects.filter(uid=uid)
-        serializer = self.get_serializer(teacher, many=True)
-        return Response(serializer.data)
+    # @action(methods=['post'], detail=True)
+    # def login(self, request, uid=None):
+    #     teacher = Teacher.objects.filter(uid=uid)
+    #     serializer = self.get_serializer(teacher, many=True)
+    #     return Response(serializer.data)
+
+    @action(methods=['put'], detail=True)
+    def put(self, request, pk):
+        #过滤出nid等于多少的对象。
+        teacher = Teacher.objects.get(id=str(pk))
+        '''请注意，在序列化时，我们除了传入data参数外，还需告诉序列化组件，我们需要更新哪条数据，也就是instance，
+        我们使用的序列化类是三版本的序列化类'''
+        serialized_data = TeacherSerializer(data=request.data,instance=teacher,many=False)
+        if serialized_data.is_valid():
+            serialized_data.save()
+            return Response(serialized_data.data)
+        else:
+            return Response(serialized_data.errors)
 
 
 

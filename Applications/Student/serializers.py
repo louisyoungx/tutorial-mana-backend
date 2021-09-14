@@ -16,6 +16,7 @@ class JoinedCourseSerializer(serializers.Serializer):
                                               label='所属老师')
     course_id = serializers.SlugRelatedField(slug_field="id", source="course", queryset=Course.objects.all(),
                                              label='所属课程')
+    is_delete = serializers.BooleanField(required=False, default=False, label='是否删除')
 
     def create(self, validated_data):
         """
@@ -25,11 +26,14 @@ class JoinedCourseSerializer(serializers.Serializer):
         course = Course.objects.get(id=str(validated_data['course']))
         teacher = course.teacher
 
+        course.nums += 1
+
         joined_course = JoinedCourse()
         joined_course.student = student
         joined_course.course = course
         joined_course.teacher = teacher
         joined_course.save()
+        course.save()
 
         return joined_course
 
@@ -43,6 +47,7 @@ class JoinedTutorialSerializer(serializers.Serializer):
     course_id = serializers.SlugRelatedField(required=False, slug_field="id", source="course", queryset=Course.objects.all(),
                                              label='所属课程')
     is_done = serializers.BooleanField(required=False, default=False, label='是否完成')
+    is_delete = serializers.BooleanField(required=False, default=False, label='是否删除')
 
     def create(self, validated_data):
         """
@@ -52,10 +57,13 @@ class JoinedTutorialSerializer(serializers.Serializer):
         tutorial = Tutorial.objects.get(id=str(validated_data['tutorial']))
         course = tutorial.course
 
+        tutorial.joined_num += 1
+
         joined_tutorial = JoinedTutorial()
         joined_tutorial.student = student
         joined_tutorial.tutorial = tutorial
         joined_tutorial.course = course
         joined_tutorial.save()
+        tutorial.save()
 
         return joined_tutorial

@@ -5,7 +5,7 @@ from Applications.Teacher.models import Teacher, Course, Tutorial
 # Teacher模型的管理器
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('uid', 'name', 'avatar', 'wechat_id', 'phone', 'email')
+    list_display = ('uid', 'name', 'avatar', 'wechat_id', 'phone', 'email', 'location')
 
 # Course模型的管理器
 @admin.register(Course)

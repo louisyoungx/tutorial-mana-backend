@@ -6,14 +6,20 @@ from rest_framework import serializers
 class TeacherSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Teacher
-        fields = ['id', 'uid', 'name', 'avatar', 'wechat_id', 'phone', 'email']
+        fields = ['id', 'uid', 'name', 'avatar', 'wechat_id', 'phone', 'email', 'location']
 
 
 
 class CourseSerializer(serializers.Serializer):
     id = serializers.CharField(required=False, max_length=6, label='ID')
     teacher_id = serializers.SlugRelatedField(slug_field="id", source="teacher", queryset=Teacher.objects.all(),
-                                              label='所属老师')
+                                              label='老师id')
+    teacher_name = serializers.SlugRelatedField(required=False, slug_field="name", source="teacher", queryset=Teacher.objects.all(),
+                                              label='老师姓名')
+    teacher_phone = serializers.SlugRelatedField(required=False, slug_field="phone", source="teacher", queryset=Teacher.objects.all(),
+                                              label='老师手机')
+    teacher_avatar = serializers.SlugRelatedField(required=False, slug_field="avatar", source="teacher", queryset=Teacher.objects.all(),
+                                              label='老师头像')
     name = serializers.CharField(max_length=10, label='课程')
     wallpaper = serializers.URLField(max_length=200, min_length=None, allow_blank=True, label='壁纸')
     describe = serializers.CharField(max_length=50, label='描述')
@@ -48,6 +54,14 @@ class TutorialSerializer(serializers.Serializer):
                                              label='课程名')
     teacher_id = serializers.SlugRelatedField(required=False, slug_field="id", source="teacher", queryset=Teacher.objects.all(),
                                              label='所属老师')
+    teacher_name = serializers.SlugRelatedField(required=False, slug_field="name", source="teacher", queryset=Teacher.objects.all(),
+                                             label='老师姓名')
+    teacher_phone = serializers.SlugRelatedField(required=False, slug_field="phone", source="teacher", queryset=Teacher.objects.all(),
+                                             label='老师手机')
+    teacher_email = serializers.SlugRelatedField(required=False, slug_field="email", source="teacher", queryset=Teacher.objects.all(),
+                                             label='老师邮箱')
+    teacher_avatar = serializers.SlugRelatedField(required=False, slug_field="avatar", source="teacher", queryset=Teacher.objects.all(),
+                                             label='老师头像')
     describe = serializers.CharField(max_length=50, label='描述')
     start_time = serializers.DateTimeField(label='开始时间')
     duration_time = serializers.FloatField(label='持续时间')
